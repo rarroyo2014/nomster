@@ -3,7 +3,7 @@
     <h1><%= link_to place.name, place_path(place) %></h1><br />
     <i><%= place.address %></i><br /><br />
     <p><%= place.description %></p><br />
-
+  
     <% if place.user.present? %>
       <small><%= place.user.email %></small>
     <% end %>
@@ -19,9 +19,17 @@
       </blockquote>
     </div>
   <% end %>
-
+  <% if place.photos.present? %>
+    <div class="col-12">
+       <% if place.photos.last.present? %>
+        <%= image_tag place.photos.last.picture.to_s, class: 'img-fluid' %>
+       <% end %>
+       <br />
+       <%= place.photos.last.caption %>
+        <small><%= place.photos.last.user.email %></small>
+    </div>
+  <% end %>
   </div>
-
 <% end %>
 
 <%= will_paginate @places, previous_label: h("<"), next_label: h(">") %>
